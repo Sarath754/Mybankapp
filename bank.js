@@ -3,7 +3,7 @@
 
 class Bank {
 
-    static getData = () => {
+    static getData = () => {      
 
 
         var accountDetails = {
@@ -16,9 +16,9 @@ class Bank {
         }
         return accountDetails
     }
-    static login = () => {
-        let uname = document.querySelector("#username").value
-        let pwd = document.querySelector("#password").value
+    static login = () => {        //static login===bank.login in html call cheyan vendi
+        let uname = document.querySelector("#username").value //userone
+        let pwd = document.querySelector("#password").value //test
         let dataset = Bank.getData()
 
         if (uname in dataset) {
@@ -83,7 +83,7 @@ class Bank {
         }
 
     }
-}
+} 
 
 // check uname present inside dataset
 
