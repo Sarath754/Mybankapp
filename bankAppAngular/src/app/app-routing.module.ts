@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { homedir } from 'os';
+import { HistoryComponent } from './history/history.component';
+// import { homedir } from 'os';
 
 import { HomeComponent } from './home/home.component';
 
@@ -10,6 +11,7 @@ const routes: Routes = [
 
   {path:'', component:LoginComponent},
   {path:'home', component:HomeComponent},
+  {path:'history', component:HistoryComponent}
 ];
 
 @NgModule({
