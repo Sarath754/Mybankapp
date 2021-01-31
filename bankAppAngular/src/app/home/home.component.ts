@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BankService } from '../services/bank.service';
 // import{Router} from '@angular/router';
@@ -14,44 +15,62 @@ export class HomeComponent
 {
 
 
-  username = "";
-  password = "";
-  amount :number= 0;
+  // username = "";
+  // password = "";
+  // amount :number= 0;
 //amount="";
 
-  constructor(private bankService: BankService, private router:Router ) { }
+  // constructor(private bankService: BankService, private router:Router ) { }
 
-  ngOnInit(): void {
+  homeForm=this.fb.group({
+
+    username:[""],
+    password:[""],
+    amount:[0]
+
+  })
+
+  constructor(private bankService: BankService, private router:Router ,private fb:FormBuilder) { }
+  // ngOnInit(): void {
     
-  }
+  // }
 
 
 
 
-  onUsernameChange(event: any) {
+  // onUsernameChange(event: any) {
 
 
 
-    this.username = event.target.value
+  //   this.username = event.target.value
 
-  }
+  // }
 
-  onPasswordChange(event: any) {
+  // onPasswordChange(event: any) {
 
-    this.password = event.target.value
+  //   this.password = event.target.value
 
-  }
+  // }
 
-  onAmountChange(event: any) {
+  // onAmountChange(event: any) {
 
-    this.amount = event.target.value
+  //   this.amount = event.target.value
 
-  }
+  // }
 
 
   deposit() {
 
-    this.bankService.deposit(this.username, this.password, this.amount);
+    const username= this.homeForm.value.username
+
+    const password=this.homeForm.value.password
+
+    const amount=parseInt(this.homeForm.value.amount)
+
+
+
+
+    this.bankService.deposit(username, password, amount);
 
     //alert("deposit sucess")
      this.router.navigateByUrl("/history");
@@ -60,7 +79,15 @@ export class HomeComponent
 
 
   withdraw() {
-    this.bankService.withdraw(this.username, this.password, this.amount);
+
+    const username= this.homeForm.value.username
+
+    const password=this.homeForm.value.password
+
+    const amount=this.homeForm.value.amount
+
+
+    this.bankService.withdraw(username, password, amount);
 
     this.router.navigateByUrl("/history");
 
