@@ -67,7 +67,7 @@ export class BankService {
   }
 
   withdraw = (uname: string, pwd: string, amt: number) => {
-    
+
     let user = this.authenticateuser(uname, pwd);
 
     let dataset = this.accountDetails
@@ -81,7 +81,7 @@ export class BankService {
           //...........
           dataset[uname].history.push({
 
-            amount: amt, typeOfTransaction: 'debit'  
+            amount: amt, typeOfTransaction: 'debit'
           });
 
           //.................
@@ -100,7 +100,7 @@ export class BankService {
 
 
   }
-  getHistory=() =>{
+  getHistory = () => {
 
     let dataset = this.accountDetails;
     return dataset["userone"].history;
