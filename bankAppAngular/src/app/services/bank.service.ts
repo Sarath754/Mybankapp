@@ -9,7 +9,7 @@ export class BankService {
   accountDetails: any = {
 
     userone: { acno: 1000, name: "Sarath", balance: 10000, username: "userone", password: "testuser", history: [] },
-    usertwo: { acno: 1001, name: "Dhoni", balance: 20000, username: "usertwo", password: "testuser1", history: [] },
+    usertwo: { acno: 1001, name: "prayag", balance: 20000, username: "usertwo", password: "testuser1", history: [] },
     userthree: { acno: 1002, name: "Raina", balance: 25000, username: "userthree", password: "testuser2", history: [] },
 
 
