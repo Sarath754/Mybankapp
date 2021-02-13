@@ -1,156 +1,103 @@
 var express = require('express');
 var router = express.Router();
-var bankService=require("../services/bankservices");
+var bankService = require('../services/bankservice')
 
-const jwt=require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-const jwtSecret="secretkey!$@"
+const jwtsecret="scerectkey@#$"
 
-const authMiddleware =(req,res,next)=>{
-
-  try{
-
-    const token=req.headers.authorization.split("")[1];
-
-    //console.log(req.headers.authorization)
-
-  
+const authMiddleware=(req,res,next)=>{
 
 
-    const user=jwt.verify(token,jwtSecret)
-          
+  try {
+//console.log(req.headers.authorization)
+
+const token=req.headers.authorization.split(" ")[1];
+
+    const user = jwt.verify(token, jwtsecret)
+
     req.user=user;
-    
-  next()
-    
-       
+    next()
 
+   // console.log(decoded)
   }
 
- catch{
-res.send({message:"invalid details"})
+  catch {
+//status code
+    res.status(401).send({ message: "invalid details" })
 
- }
+
+  }
 
 
 }
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'welcome' });
+  res.render('index', { title: 'Express' });
 });
-
 
 router.post('/login', function (req, res, next) {
 
-  const result=bankService.authenticateuser(req.body.username,req.body.password);
-
-  console.log(result)
-  // res.send(result);
-
-  if(result==1){
-
-    const token=jwt.sign({
-
-username:req.body.username },jwtSecret);
-
-   
 
 
-    const decoded=jwt.verify(token,jwtSecret)
-          
+  const result = bankService.authenticateuser(req.body.username, req.body.password)
 
-    // res.send({message:"logged in",token:"&&hbhygv*"})
+  if (result == 1) {
+
+    const token = jwt.sign({
+
+      username: req.body.username
+
+    }, jwtsecret);
+
+    //const decoded=jwt.verify(token,"scerectkey@#$")
 
     res.send({
-      message:"logged in succesfully",
-      token:token,
-      decoded
-    })
-    
+      message: "Logged in sucessfully",
+      token: token,
+      // decoded 
+    });
+
   }
-
-  else{
-
-    res.send({
-      message:"invalid credentials"})
+  else {
+//status code
+    res.status(422).send({message:"invalid credentials"})
   }
-
-  // console.log(result)
-  // console.log(req.body)
-  // res.render('index', { title: 'Express' });
-  
 });
 
 
-// router.post('/deposit',function(req,res){
+router.post('/deposit',authMiddleware, function (req, res, next) {
 
-//   const message=bankService.deposit(req.body.username,req.body.password,req.body.amount);
 
-// res.send(message)
+    const message = bankService.deposit(req.user.username, req.body.amount);
 
- router.post('/deposit',authMiddleware, function(req,res){
+    res.send(message);
 
-  
-    const decoded=jwt.verify(req.body.token,jwtSecret)
-          
-  
-    
-       const message=bankService.deposit(req.user.username,req.body.amount);
-       res.send(message)
-
+   // console.log(decoded)
   
 
-
-})
-
+});
 
 
 
-router.post('/withdraw',authMiddleware, function(req,res){
-
-
-//   try{
-//     const decoded=jwt.verify(req.body.token,"secretkey!$@")
-          
-  
-    
-//        const message=bankService.withdraw(decoded.username,req.body.amount);
-//        res.send(message)
-
-//   }
-
-//  catch{
-// res.send({message:"invalid details"})
-
-//  }
-
-
-const decoded=jwt.verify(req.body.token,jwtSecret)
-
-  const message=bankService.withdraw(req.user.username,req.body.amount);
+router.post('/withdraw',authMiddleware ,function (req, res, next) {
 
 
 
-res.send(message)
+  const message = bankService.withdraw(req.user.username, req.body.amount)
 
-})
+  res.send(message)
 
-
-
-
+});
 
 
-
-router.get('/history',authMiddleware ,function(req,res){
-
-  // const decoded=jwt.verify(req.user.username.token,"secretkey!$@")
-
-  const message=bankService.history(req.user.username);
+router.get('/history',authMiddleware, function (req, res, next) {
 
 
 
-res.send(message)
+  const message = bankService.history(req.user.username)
+
+  res.send(message)
 
 })
 

@@ -1,12 +1,11 @@
 let accountDetails = {
 
     userone: { acno: 1000, name: "Sarath", balance: 10000, username: "userone", password: "testuser", history: [] },
-    usertwo: { acno: 1001, name: "Dhoni", balance: 20000, username: "usertwo", password: "testuser1", history: [] },
+    usertwo: { acno: 1001, name: "prayag", balance: 20000, username: "usertwo", password: "testuser1", history: [] },
     userthree: { acno: 1002, name: "Raina", balance: 25000, username: "userthree", password: "testuser2", history: [] },
 
 
 };
-
 
 
 const authenticateuser = (username, password) => {        //static login===bank.login in html call cheyan vendi
@@ -18,25 +17,26 @@ const authenticateuser = (username, password) => {        //static login===bank.
 
             return 1;
 
-            // return {message:"logged in",token:"$%#@re"}
 
-            // alert("login successful")
-            // this.router.navigateByUrl("/home");
         }
         else {
             return 0;
-            // alert("incorrect password")
+            
         }
     }
     else {
 
         return -1;
-        // alert("no user exist with provided username")
+      
     }
 
 }
 
-const deposit = (username, amount) => {
+
+
+
+
+  const deposit = (username, amount) => {
 
     // let user = authenticateuser(username, password);
 
@@ -51,13 +51,10 @@ const deposit = (username, amount) => {
             typeOfTransaction: "credit"
 
         })
-        return{
-            balance:accountDetails[username].balance,
-           message: "your accont has been credited with" + amount + "newbalance" + accountDetails[username].balance
-
-    };
-
-
+        
+           return {balance:accountDetails[username].balance,
+           
+          message: "your accont has been credited with" + amount + "newbalance" + accountDetails[username].balance}
 
     }
 
@@ -66,9 +63,8 @@ const deposit = (username, amount) => {
 //     }
 
 
-
-
 // }
+
 
 const withdraw = (username,  amount) => {
 
@@ -80,7 +76,7 @@ const withdraw = (username,  amount) => {
 
         if (accountDetails[username].balance < amount) {
 
-            return "insufficient balance"
+            return{ message:"insufficient balance"}
         }
 
 
@@ -94,48 +90,44 @@ const withdraw = (username,  amount) => {
 
         });
 
-        return {
-        balance:accountDetails[username].balance,
-        message:"your account has been debited with" + amount + "newbalance" + accountDetails[username].balance
+        
+     return {balance:accountDetails[username].balance,message: "your account has been debited with" + amount + "newbalance" + accountDetails[username].balance}
     
-    };
+    
 }
 
-    // else {
+//     else {
 
-    //     return {message:"invalid details"}
-    // }
+//         return {message:"invalid details"}
+//     }
 
-//}
-
-
+// }
 
 
+const history=(username,password )=>{
 
+//     let user=authenticateuser(username,password);
 
-
-
-const history=(username)=>{
-
-
+// if(user==1){
 
     return accountDetails[username].history
- }
+ 
+}
+
 // else{  
 
 //     return [];
 // }
 
-
-
 // }
 
 
 
-module.exports = {
+
+  
+module.exports={
 
     authenticateuser,
-    deposit,
-    withdraw,
-    history
+    deposit,withdraw,history
+
 }
