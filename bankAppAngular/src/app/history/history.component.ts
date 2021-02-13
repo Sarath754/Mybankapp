@@ -15,9 +15,17 @@ export class HistoryComponent implements OnInit {
   
 
   constructor(private bankService:BankService) {
-    this.history=bankService.getHistory();
+    bankService.getHistory()
+
+    .subscribe((data:any)=>{
+
+      this.history=data
+    })
    }
 
+
+
+   
   ngOnInit(): void {
   }
 

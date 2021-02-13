@@ -1,9 +1,16 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BankService {
+
+  constructor(private http: HttpClient) {
+
+
+
+  }
 
 
   accountDetails: any = {
@@ -15,95 +22,186 @@ export class BankService {
 
   };
 
-  authenticateuser = (uname: string, pwd: string) => {        //static login===bank.login in html call cheyan vendi
+  authenticateuser = (uname: string, pwd: string) => {
 
-    let dataset = this.accountDetails
+    return this.http.post("http://localhost:7000/login", {
 
-    if (uname in dataset) {
-      if (dataset[uname].password == pwd) {
-        alert("login successful")
-        // this.router.navigateByUrl("/home");
-      }
-      else {
-        alert("incorrect password")
-      }
-    }
-    else {
-      alert("no user exist with provided username")
-    }
+      "username": uname,
+
+      "password": pwd
+
+    })
 
   }
+
+
+  generateHeader = () => {
+
+    //token store chyean
+    
+    let token=localStorage.getItem("token")
+
+
+    let headers = new HttpHeaders();
+
+    headers = headers.set("Authorization", "Bearer " +token) 
+    return headers
+
+  }
+  // .subscribe((data)=>{
+
+  //   console.log(data);
+  // })
+
+
+  // let dataset = this.accountDetails
+
+  // if (uname in dataset) {
+  //   if (dataset[uname].password == pwd) {
+  //     alert("login successful")
+  //     // this.router.navigateByUrl("/home");
+  //   }
+  //   else {
+  //     alert("incorrect password")
+  //   }
+  // }
+  // else {
+  //   alert("no user exist with provided username")
+  // }
+
+
   //......................................................................................
 
-  deposit = (uname: string, pwd: string, amt: any) => {
+  //deposit = (uname: string, pwd: string, amt: any) => {
 
-    let user = this.authenticateuser(uname, pwd);
+  deposit = (amt: any) => {
 
-    //alert("deposit")  
 
-    let dataset = this.accountDetails;
+    return this.http.post("http://localhost:7000/deposit", {
 
-    if (uname in dataset) {
-      if (dataset[uname].password == pwd) {
 
-        dataset[uname].balance += parseInt(amt);
-        //.........
 
-        dataset[uname].history.push({
+      "amount": amt
 
-          amount: amt, typeOfTransaction: 'credit'
-        });
-        //...........
-        alert("your account credited with amount" + amt + "avail bal=" + dataset[uname].balance)
-      }
-      else {
-        alert("incorrect password")
-      }
-    }
-    else {
-      alert("no user exist with provided username")
-    }
+
+
+    },
+
+      {
+        headers: this.generateHeader()
+      });
 
   }
 
-  withdraw = (uname: string, pwd: string, amt: number) => {
+  // let user = this.authenticateuser(uname, pwd);
 
-    let user = this.authenticateuser(uname, pwd);
+  // //alert("deposit")  
 
-    let dataset = this.accountDetails
-    if (uname in dataset) {
-      if (dataset[uname].password == pwd) {
-        if (dataset[uname].balance >= amt) {
+  // let dataset = this.accountDetails;
+
+  // if (uname in dataset) {
+  //   if (dataset[uname].password == pwd) {
+
+  //     dataset[uname].balance += parseInt(amt);
+  //     //.........
+
+  //     dataset[uname].history.push({
+
+  //       amount: amt, typeOfTransaction: 'credit'
+  //     });
+  //     //...........
+  //     alert("your account credited with amount" + amt + "avail bal=" + dataset[uname].balance)
+  //   }
+  //   else {
+  //     alert("incorrect password")
+  //   }
+  // }
+  // else {
+  //   alert("no user exist with provided username")
+  // }
 
 
 
-          dataset[uname].balance -= amt;
-          //...........
-          dataset[uname].history.push({
 
-            amount: amt, typeOfTransaction: 'debit'
-          });
+  withdraw = (amt: number) => {
 
-          //.................
-          alert("your account debited with amount" + amt + "avail bal=" + dataset[uname].balance)
 
-        }
-        else {
-          alert("insufficient balance")
-        }
-      }
-      else {
-        alert("no user exist with provided username")
-      }
-    }
+
+    //let headers = new HttpHeaders();
+
+    //headers = headers.set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJvbmUiLCJpYXQiOjE2MTI5NzU2NDl9.N6hCPTQIVVYDAzpPTNYTt-4g8Rc9eevIT2_41KWp4RY")
+
+
+    return this.http.post("http://localhost:7000/withdraw", {
+
+
+
+      "amount": amt
+
+
+
+    },
+
+      {
+        headers: this.generateHeader()
+      });
+
+
+    // let user = this.authenticateuser(uname, pwd);
+
+    // let dataset = this.accountDetails
+    // if (uname in dataset) {
+    //   if (dataset[uname].password == pwd) {
+    //     if (dataset[uname].balance >= amt) {
+
+
+
+    //       dataset[uname].balance -= amt;
+    //       //...........
+    //       dataset[uname].history.push({
+
+    //         amount: amt, typeOfTransaction: 'debit'
+    //       });
+
+    //       //.................
+    //       alert("your account debited with amount" + amt + "avail bal=" + dataset[uname].balance)
+
+    //     }
+    //     else {
+    //       alert("insufficient balance")
+    //     }
+    //   }
+    //   else {
+    //     alert("no user exist with provided username")
+    //   }
+    // }
 
 
 
   }
+
+
+
   getHistory = () => {
 
-    let dataset = this.accountDetails;
-    return dataset["userone"].history;
-  }
+    // let headers = new HttpHeaders();
 
+    // headers = headers.set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJvbmUiLCJpYXQiOjE2MTI5NzU2NDl9.N6hCPTQIVVYDAzpPTNYTt-4g8Rc9eevIT2_41KWp4RY")
+
+
+    return this.http.get("http://localhost:7000/history", {
+
+
+
+      headers: this.generateHeader()
+    });
+
+
+
+
+
+
+
+  }
 }
+

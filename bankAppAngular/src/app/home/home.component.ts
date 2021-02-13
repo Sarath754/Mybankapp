@@ -1,3 +1,4 @@
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -70,10 +71,19 @@ export class HomeComponent
 
 
 
-    this.bankService.deposit(username, password, amount);
+    this.bankService.deposit(amount )
+    
+    
+    .subscribe((data:any)=>{
+
+      alert(data.message);
+     // console.log(data)
+    })
+
+
 
     //alert("deposit sucess")
-     this.router.navigateByUrl("/history");
+    // this.router.navigateByUrl("/history");
   }
 
 
@@ -87,9 +97,15 @@ export class HomeComponent
     const amount=this.homeForm.value.amount
 
 
-    this.bankService.withdraw(username, password, amount);
+    this.bankService.withdraw( amount)
 
-    this.router.navigateByUrl("/history");
+    .subscribe((data:any)=>{
+
+
+      alert(data.message)
+    })
+
+   // this.router.navigateByUrl("/history");
 
   }
 

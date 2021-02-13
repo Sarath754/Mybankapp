@@ -17,6 +17,9 @@ const authenticateuser = (username, password) => {        //static login===bank.
         if (dataset[username].password == password) {
 
             return 1;
+
+            // return {message:"logged in",token:"$%#@re"}
+
             // alert("login successful")
             // this.router.navigateByUrl("/home");
         }
@@ -33,11 +36,11 @@ const authenticateuser = (username, password) => {        //static login===bank.
 
 }
 
-const deposit = (username, password, amount) => {
+const deposit = (username, amount) => {
 
-    let user = authenticateuser(username, password);
+    // let user = authenticateuser(username, password);
 
-    if (user == 1) {
+    // if (user == 1) {
 
 
         accountDetails[username].balance += amount
@@ -48,24 +51,30 @@ const deposit = (username, password, amount) => {
             typeOfTransaction: "credit"
 
         })
-        return "your accont has been credited with" + amount + "newbalance" + accountDetails[username].balance
+        return{
+            balance:accountDetails[username].balance,
+           message: "your accont has been credited with" + amount + "newbalance" + accountDetails[username].balance
+
+    };
+
+
 
     }
 
-    else {
-        return "invalid credits"
-    }
+//     else {
+//         return {message:"invalid credits"}
+//     }
 
 
 
 
-}
+// }
 
-const withdraw = (username, password, amount) => {
+const withdraw = (username,  amount) => {
 
-    let user = authenticateuser(username, password);
+    // let user = authenticateuser(username, password);
 
-    if (user == 1) {
+    // if (user == 1) {
 
         console.log(accountDetails[username].balance)
 
@@ -85,20 +94,48 @@ const withdraw = (username, password, amount) => {
 
         });
 
-        return "your account has been debited with" + amount + "newbalance" + accountDetails[username].balance
-
-    }
-
-    else {
-
-        return "invalid details"
-    }
-
+        return {
+        balance:accountDetails[username].balance,
+        message:"your account has been debited with" + amount + "newbalance" + accountDetails[username].balance
+    
+    };
 }
+
+    // else {
+
+    //     return {message:"invalid details"}
+    // }
+
+//}
+
+
+
+
+
+
+
+
+const history=(username)=>{
+
+
+
+    return accountDetails[username].history
+ }
+// else{  
+
+//     return [];
+// }
+
+
+
+// }
+
+
 
 module.exports = {
 
     authenticateuser,
     deposit,
-    withdraw
+    withdraw,
+    history
 }

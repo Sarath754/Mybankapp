@@ -21,7 +21,7 @@ export class LoginComponent {
   //reactive forms method 
   loginform = this.fb.group({
     username: ["", [Validators.required]],
-    password: ["", [Validators.required , Validators.minLength(5)]]
+    password: ["", [Validators.required, Validators.minLength(5)]]
   });
 
   constructor(private bankService: BankService, private router: Router, private fb: FormBuilder) {
@@ -81,35 +81,53 @@ export class LoginComponent {
 
 
 
-        // console.log(this.loginform.get("username")?.errors)
+      // console.log(this.loginform.get("username")?.errors)
 
-        alert("form is invalid")
-      }
+      alert("form is invalid")
+    }
 
-      else {
-        const username = this.loginform.value.username
+    else {
+      const username = this.loginform.value.username
 
-        const password = this.loginform.value.password
-
-
-
-        const user = this.bankService.authenticateuser(username, password);
-
-        this.router.navigateByUrl("/home")
-      }
-
-
-      // const username=this.loginform.value.username
-
-      // const password=this.loginform.value.password
+      const password = this.loginform.value.password
 
 
 
-      // const user = this.bankService.authenticateuser(username, password);
+      const user = this.bankService.authenticateuser(username, password)
 
-      // this.router.navigateByUrl("/home")
+        //linking statement
 
+        .subscribe((data: any) => {
+
+          alert(data.message);
+
+          //token save cheyan
+
+          localStorage.setItem("token",data.token);
+
+          this.router.navigateByUrl("/home")
+          // console.log(data)
+        }, (err) => {
+
+          alert(err.error.message)
+
+        });
+
+      //this.router.navigateByUrl("/home")
     }
 
 
+    // const username=this.loginform.value.username
+
+    // const password=this.loginform.value.password
+
+
+
+    // const user = this.bankService.authenticateuser(username, password);
+
+    // this.router.navigateByUrl("/home")
+
   }
+
+
+}
