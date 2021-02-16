@@ -10,6 +10,8 @@ import { BankService } from '../services/bank.service';
 })
 export class LoginComponent {
 
+  test="helloworld"
+
   // username = "";
   // password = "";
 

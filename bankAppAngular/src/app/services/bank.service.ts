@@ -1,5 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
+//import{environment} from '../../environments/environment'
+
+const apiurl=environment.apiurl
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +29,7 @@ export class BankService {
 
   authenticateuser = (uname: string, pwd: string) => {
 
-    return this.http.post("http://localhost:7000/login", {
+    return this.http.post(apiurl+"/login", {
 
       "username": uname,
 
@@ -77,7 +82,7 @@ export class BankService {
   deposit = (amt: any) => {
 
 
-    return this.http.post("http://localhost:7000/deposit", {
+    return this.http.post(apiurl+"/deposit", {
 
 
 
@@ -132,7 +137,7 @@ export class BankService {
     //headers = headers.set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJvbmUiLCJpYXQiOjE2MTI5NzU2NDl9.N6hCPTQIVVYDAzpPTNYTt-4g8Rc9eevIT2_41KWp4RY")
 
 
-    return this.http.post("http://localhost:7000/withdraw", {
+    return this.http.post(apiurl+"/withdraw", {
 
 
 
@@ -189,7 +194,7 @@ export class BankService {
     // headers = headers.set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJvbmUiLCJpYXQiOjE2MTI5NzU2NDl9.N6hCPTQIVVYDAzpPTNYTt-4g8Rc9eevIT2_41KWp4RY")
 
 
-    return this.http.get("http://localhost:7000/history", {
+    return this.http.get(apiurl+"/history", {
 
 
 
