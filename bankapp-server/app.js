@@ -7,7 +7,11 @@ const cors=require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const mongoose= require('mongoose');
+
 var app = express();
+
+mongoose.connect('mongodb://localhost:27017/bank-app', { useNewUrlParser:true,useUnifiedTopology:true });
 
 app.use(cors({
 
