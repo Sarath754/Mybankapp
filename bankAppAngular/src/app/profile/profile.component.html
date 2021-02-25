@@ -1,0 +1,60 @@
+<!-- <p>profile works!</p> -->
+
+<div class="container">
+
+
+    <div class="main">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <h1>PROFILE PAGE</h1>
+            </div>
+            <div class="col"></div>
+        </div>
+
+
+
+
+        <form [formGroup]="profileform">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">username *</label>
+                <input type="text" formControlName="username" name="username" class="form-control" id="username"
+                    aria-describedby="emailHelp">
+                <!-- <div id="emailHelp" *ngIf="profileform.controls.username.touched && profileform.controls.username.errors "
+                style="color: red;" class="form-text">
+                Invalid username</div> -->
+            </div>
+
+
+
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">acno *</label>
+                <input type="text" formControlName="acno" name="acno" class="form-control" id="password">
+                <!-- <div id="emailHelp" *ngIf="loginform.controls.password.touched && loginform.controls.password.errors">
+
+                <label *ngIf="loginform.controls.password.errors.required" style="color: red;">Password is
+                    Required</label>
+                <label *ngIf="loginform.controls.password.errors.minlength" style="color: red;">Password must be
+                    atleast 5 characters</label>
+            </div> -->
+            </div>
+
+
+
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">balance *</label>
+                <input type="text" formControlName="balance" name="balance" class="form-control" id="password">
+
+            </div>
+
+        </form>
+
+
+
+
+
+    </div>
+
+</div>

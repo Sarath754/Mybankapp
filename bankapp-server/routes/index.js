@@ -105,10 +105,7 @@ router.post('/login', function (req, res, next) {
 
     .then(user => {
 
-
-
-
-      if (user ) {
+      if (user) {
 
         const token = jwt.sign({
 
@@ -137,14 +134,14 @@ router.post('/login', function (req, res, next) {
 router.post('/deposit', authMiddleware, function (req, res, next) {
 
 
-   bankService.deposit(req.user.username, req.body.amount)
-   .then(message=>{
+  bankService.deposit(req.user.username, req.body.amount)
+    .then(message => {
 
-    res.send(message);
+      res.send(message);
 
-   })
+    })
 
- 
+
   // console.log(decoded)
 
 
@@ -156,15 +153,15 @@ router.post('/withdraw', authMiddleware, function (req, res, next) {
 
 
 
-   bankService.withdraw(req.user.username, req.body.amount)
+  bankService.withdraw(req.user.username, req.body.amount)
 
-.then(message=>{
+    .then(message => {
 
-    res.send(message);
+      res.send(message);
 
-   })
+    })
 
- 
+
 
 });
 
@@ -172,12 +169,32 @@ router.post('/withdraw', authMiddleware, function (req, res, next) {
 router.get('/history', authMiddleware, function (req, res, next) {
 
 
+  bankService.getUser(req.user.username)
 
-  const message = bankService.history(req.user.username)
+    .then(user => {
 
-  res.send(message)
+      res.send(user.history);
+
+    })
 
 })
+
+router.get('/profile', authMiddleware, function (req, res, next) {
+
+
+  bankService.getUser(req.user.username)
+
+    .then(user => {
+
+      res.send(user);
+
+    })
+
+})
+
+
+
+
 
 
 module.exports = router;

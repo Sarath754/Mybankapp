@@ -201,12 +201,25 @@ export class BankService {
       headers: this.generateHeader()
     });
 
+  }
 
 
 
 
+  getProfile = () => {
 
+    
+    return this.http.get(apiurl+"/profile", {
+
+
+
+      headers: this.generateHeader()
+    });
 
   }
+
+
+
+
 }
 

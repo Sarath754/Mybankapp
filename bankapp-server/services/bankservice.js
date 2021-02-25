@@ -195,13 +195,14 @@ const withdraw = (username, amount) => {
 // }
 
 
-const history = (username, password) => {
+const getUser = (username, password) => {
 
     //     let user=authenticateuser(username,password);
 
     // if(user==1){
 
-    return accountDetails[username].history
+    return User.findOne({username})
+    //return accountDetails[username].history
 
 }
 
@@ -219,6 +220,7 @@ const history = (username, password) => {
 module.exports = {
 
     authenticateuser,
-    deposit, withdraw, history
+    deposit, withdraw, getUser
+    
 
 }
