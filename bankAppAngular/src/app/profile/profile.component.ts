@@ -36,12 +36,43 @@ export class ProfileComponent implements OnInit {
 
       })
 
-
-
-
   }
 
+
+
   ngOnInit(): void {
+  }
+
+
+  updateProfile() {
+
+    if (this.profileform.valid == false) {
+
+      alert("invalid data ")
+
+    }
+
+    else {
+
+      this.bankService.updateProfile(
+
+        this.profileform.value.acno,
+        this.profileform.value.balance,
+        this.profileform.value.username,
+
+      ).subscribe((data:any)=>{
+
+        alert(data.message)
+
+      })
+      
+
+
+
+
+    }
+
+
   }
 
 }

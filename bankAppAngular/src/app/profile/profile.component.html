@@ -15,7 +15,7 @@
 
 
 
-        <form [formGroup]="profileform">
+        <form [formGroup]="profileform" (ngsumbit)="updateProfile()" >
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">username *</label>
                 <input type="text" formControlName="username" name="username" class="form-control" id="username"
@@ -48,6 +48,10 @@
                 <input type="text" formControlName="balance" name="balance" class="form-control" id="password">
 
             </div>
+
+  <button type="button" (click)="updateProfile()" class="btn btn-primary">Update</button>
+
+           
 
         </form>
 

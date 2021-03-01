@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 
 //import{environment} from '../../environments/environment'
 
-const apiurl=environment.apiurl
+const apiurl = environment.apiurl
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class BankService {
 
   authenticateuser = (uname: string, pwd: string) => {
 
-    return this.http.post(apiurl+"/login", {
+    return this.http.post(apiurl + "/login", {
 
       "username": uname,
 
@@ -43,13 +43,13 @@ export class BankService {
   generateHeader = () => {
 
     //token store chyean
-    
-    let token=localStorage.getItem("token")
+
+    let token = localStorage.getItem("token")
 
 
     let headers = new HttpHeaders();
 
-    headers = headers.set("Authorization", "Bearer " +token) 
+    headers = headers.set("Authorization", "Bearer " + token)
     return headers
 
   }
@@ -82,7 +82,7 @@ export class BankService {
   deposit = (amt: any) => {
 
 
-    return this.http.post(apiurl+"/deposit", {
+    return this.http.post(apiurl + "/deposit", {
 
 
 
@@ -137,7 +137,7 @@ export class BankService {
     //headers = headers.set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJvbmUiLCJpYXQiOjE2MTI5NzU2NDl9.N6hCPTQIVVYDAzpPTNYTt-4g8Rc9eevIT2_41KWp4RY")
 
 
-    return this.http.post(apiurl+"/withdraw", {
+    return this.http.post(apiurl + "/withdraw", {
 
 
 
@@ -194,7 +194,7 @@ export class BankService {
     // headers = headers.set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJvbmUiLCJpYXQiOjE2MTI5NzU2NDl9.N6hCPTQIVVYDAzpPTNYTt-4g8Rc9eevIT2_41KWp4RY")
 
 
-    return this.http.get(apiurl+"/history", {
+    return this.http.get(apiurl + "/history", {
 
 
 
@@ -208,8 +208,8 @@ export class BankService {
 
   getProfile = () => {
 
-    
-    return this.http.get(apiurl+"/profile", {
+
+    return this.http.get(apiurl + "/profile", {
 
 
 
@@ -218,6 +218,46 @@ export class BankService {
 
   }
 
+
+  
+  getUsers = () => {
+
+
+    return this.http.get(apiurl + "/users", {
+
+
+
+      headers: this.generateHeader()
+    });
+
+  }
+
+
+
+  updateProfile = (acno: Number, balance:Number,username: string) => {
+
+
+    return this.http.patch(apiurl + "/profile", {
+
+
+
+      
+      acno,
+      balance,
+      username
+
+
+
+    }, {
+
+
+      headers: this.generateHeader()
+    });
+
+
+
+
+  }
 
 
 

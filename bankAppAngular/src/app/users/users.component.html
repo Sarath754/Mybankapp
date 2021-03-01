@@ -1,0 +1,36 @@
+<!-- <p>users works!</p> -->
+<table>
+
+    <tr>
+
+
+
+        <td>Username</td>
+        <td>Account No</td>
+        <td>Balance</td>
+        <td>Edit</td>
+
+        
+
+
+
+
+
+    </tr>
+
+
+    <tr *ngFor="let item of users">
+
+        <td>{{item.username}}</td>
+
+        <td>{{item.acno}}</td>
+  
+        <td>{{item.balance}}</td>
+
+        <!-- <td >Edit</td> -->
+
+       <td> <button (click)="edit(item)" type="button" class="btn btn-success">Edit</button></td>
+
+    </tr>
+
+</table>

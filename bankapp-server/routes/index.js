@@ -18,6 +18,7 @@ const authMiddleware = (req, res, next) => {
     const user = jwt.verify(token, jwtsecret)
 
     req.user = user;
+    
     next()
 
     // console.log(decoded)
@@ -66,6 +67,19 @@ router.get('/', function (req, res, next) {
   //res.render('index', { title: 'Express' });
 });
 
+router.get('/users',function(req,res){
+
+  bankService.getUsers()
+
+  .then(users => {
+
+    res.send(users);
+
+  })
+
+})
+
+
 router.post('/login', function (req, res, next) {
 
 
@@ -109,7 +123,9 @@ router.post('/login', function (req, res, next) {
 
         const token = jwt.sign({
 
-          username: req.body.username
+          username: req.body.username,
+
+          _id:user._id
 
         }, jwtsecret);
 
@@ -134,7 +150,7 @@ router.post('/login', function (req, res, next) {
 router.post('/deposit', authMiddleware, function (req, res, next) {
 
 
-  bankService.deposit(req.user.username, req.body.amount)
+  bankService.deposit(req.user._id, req.body.amount)
     .then(message => {
 
       res.send(message);
@@ -153,7 +169,7 @@ router.post('/withdraw', authMiddleware, function (req, res, next) {
 
 
 
-  bankService.withdraw(req.user.username, req.body.amount)
+  bankService.withdraw(req.user._id, req.body.amount)
 
     .then(message => {
 
@@ -169,7 +185,7 @@ router.post('/withdraw', authMiddleware, function (req, res, next) {
 router.get('/history', authMiddleware, function (req, res, next) {
 
 
-  bankService.getUser(req.user.username)
+  bankService.getUser(req.user._id)
 
     .then(user => {
 
@@ -182,7 +198,7 @@ router.get('/history', authMiddleware, function (req, res, next) {
 router.get('/profile', authMiddleware, function (req, res, next) {
 
 
-  bankService.getUser(req.user.username)
+  bankService.getUser(req.user._id)
 
     .then(user => {
 
@@ -193,6 +209,18 @@ router.get('/profile', authMiddleware, function (req, res, next) {
 })
 
 
+router.patch("/profile",authMiddleware ,function(req,res){
+
+  bankService.updateUser(req.user._id,req.body)
+
+  .then(user => {
+
+    res.send({message:"profile updated sucessfully"});
+
+  })
+
+
+})
 
 
 
