@@ -18,7 +18,7 @@ const authMiddleware = (req, res, next) => {
     const user = jwt.verify(token, jwtsecret)
 
     req.user = user;
-    
+
     next()
 
     // console.log(decoded)
@@ -67,15 +67,15 @@ router.get('/', function (req, res, next) {
   //res.render('index', { title: 'Express' });
 });
 
-router.get('/users',function(req,res){
+router.get('/users', function (req, res) {
 
   bankService.getUsers()
 
-  .then(users => {
+    .then(users => {
 
-    res.send(users);
+      res.send(users);
 
-  })
+    })
 
 })
 
@@ -125,7 +125,7 @@ router.post('/login', function (req, res, next) {
 
           username: req.body.username,
 
-          _id:user._id
+          _id: user._id
 
         }, jwtsecret);
 
@@ -209,18 +209,20 @@ router.get('/profile', authMiddleware, function (req, res, next) {
 })
 
 
-router.patch("/profile",authMiddleware ,function(req,res){
+router.patch("/profile", authMiddleware, function (req, res) {
 
-  bankService.updateUser(req.user._id,req.body)
+  bankService.updateUser(req.user._id, req.body)
 
-  .then(user => {
+    .then(user => {
 
-    res.send({message:"profile updated sucessfully"});
+      res.send({ message: "profile updated sucessfully" });
 
-  })
+    })
 
 
 })
+
+
 
 
 
