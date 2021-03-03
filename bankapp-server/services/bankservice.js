@@ -70,14 +70,14 @@ const deposit = (_id, amount) => {
 
     return User.findOne({
 
-       // username:username
-       _id  
+        // username:username
+        _id
 
-       //or
+        //or
 
-       //return User.FindById(-iD)
+        //return User.FindById(-iD)
 
-       
+
     })
         .then(user => {
             user.balance += amount
@@ -135,9 +135,9 @@ const withdraw = (_id, amount) => {
 
     return User.findOne({
 
-       // username:username
+        // username:username
 
-       _id
+        _id
     })
         .then(user => {
             if (user.balance < amount) {
@@ -157,8 +157,8 @@ const withdraw = (_id, amount) => {
 
             return {
 
-                balance:user.balance,
-             message: accountDetails[username].balance, message: "your account has been debited with" + amount + "newbalance" + user.balance 
+                balance: user.balance,
+                message: "your accont has been dedited with" + amount + "newbalance" + user.balance
 
             }
 
@@ -210,7 +210,7 @@ const getUser = (_id, password) => {
 
     // if(user==1){
 
-    return User.findOne({_id})
+    return User.findOne({ _id })
     //return accountDetails[username].history
 
 }
@@ -222,15 +222,15 @@ const getUser = (_id, password) => {
 
 // }
 
-const updateUser = function(_id,data){
+const updateUser = function (_id, data) {
 
-    return User.findByIdAndUpdate({_id},data);
+    return User.findByIdAndUpdate({ _id }, data);
 
 
 }
 
 
-const getUsers=function(){
+const getUsers = function () {
 
     return User.find();
 }
@@ -240,11 +240,11 @@ const getUsers=function(){
 module.exports = {
 
     authenticateuser,
-    deposit, 
-    withdraw, 
+    deposit,
+    withdraw,
     getUser,
     updateUser,
     getUsers
-    
+
 
 }

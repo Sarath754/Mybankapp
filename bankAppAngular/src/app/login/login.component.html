@@ -36,7 +36,7 @@
 
         <form [formGroup]="loginform" (ngSubmit)="login()">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">UserName *</label>
+                <label for="exampleInputEmail1" class="form-label"><strong>UserName *</strong> </label>
                 <input type="text" formControlName="username" name="username" class="form-control" id="username"
                     aria-describedby="emailHelp">
                 <div id="emailHelp" *ngIf="loginform.controls.username.touched && loginform.controls.username.errors "
@@ -56,7 +56,7 @@
         </div> -->
 
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password *</label>
+                <label for="exampleInputPassword1" class="form-label"><strong>Password *</strong></label>
                 <input type="password" formControlName="password" name="password" class="form-control" id="password">
                 <div id="emailHelp" *ngIf="loginform.controls.password.touched && loginform.controls.password.errors">
 

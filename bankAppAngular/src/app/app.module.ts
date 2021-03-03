@@ -11,6 +11,8 @@ import {HttpClientModule} from'@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import{BrowserAnimationsModule} from'@angular/platform-browser/animations';
+import { AnimationsComponent } from './animations/animations.component';
 
 @NgModule({
   declarations: [
@@ -20,14 +22,16 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     HistoryComponent,
     ProfileComponent,
     UsersComponent,
-    UserEditComponent
+    UserEditComponent,
+    AnimationsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

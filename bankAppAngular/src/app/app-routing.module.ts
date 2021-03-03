@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AnimationsComponent } from './animations/animations.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HistoryComponent } from './history/history.component';
 // import { homedir } from 'os';
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:'profile',component:ProfileComponent,canActivate:[AuthGuard]},
   {path:'users',component:UsersComponent,canActivate:[AuthGuard]},
   {path:'users/:id',component:UserEditComponent},
+  {path:'animations',component:AnimationsComponent}
 ];
 
 @NgModule({
