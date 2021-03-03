@@ -3,6 +3,7 @@ var router = express.Router();
 var bankService = require('../services/bankservice')
 
 const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 //const User = require('../models/user');
 
 const jwtsecret = "scerectkey@#$"
@@ -35,6 +36,20 @@ const authMiddleware = (req, res, next) => {
 }
 /* GET home page. */
 router.get('/', function (req, res, next) {
+
+  User.find({
+
+balance:{
+  $gt:1000
+}
+
+  })
+  .then(users=>{
+
+    res.send(users)
+
+
+  })
   // const user=new User({
   //   acno:200,
   //   balance:20000,

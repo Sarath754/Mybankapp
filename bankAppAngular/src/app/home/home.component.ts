@@ -108,6 +108,10 @@ export class HomeComponent
    // this.router.navigateByUrl("/history");
 
   }
+logout(){
 
+  localStorage.removeItem("token");
+  this.router.navigateByUrl("/")
+}
 
 }
