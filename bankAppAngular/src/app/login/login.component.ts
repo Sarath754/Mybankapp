@@ -10,7 +10,9 @@ import { BankService } from '../services/bank.service';
 })
 export class LoginComponent {
 
-  test="helloworld"
+ // myimage:string="assets/sbi.jpg"
+
+  // test="helloworld"
 
   // username = "";
   // password = "";
